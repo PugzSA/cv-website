@@ -177,36 +177,63 @@ document.addEventListener("DOMContentLoaded", function () {
         '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
       downloadBtn.disabled = true;
 
-      // Call the Google Cloud Function to generate the PDF
-      // Replace with your actual Cloud Function URL after deployment
-      const cloudFunctionUrl =
-        "https://generate-cv-pdf-1072078726443.us-central1.run.app";
+      // Get the current page URL (your CV website)
+      const websiteUrl = window.location.href;
 
-      console.log("Calling Cloud Function at:", cloudFunctionUrl);
+      // PDFShift API endpoint
+      const pdfshiftEndpoint = "https://api.pdfshift.io/v3/convert/pdf";
 
-      // Use fetch to call the Cloud Function
-      fetch(cloudFunctionUrl, {
-        method: "GET",
-        mode: "cors",
+      // Your PDFShift API key - replace with your actual API key
+      const apiKey = "sk_63a669f7dee95799e7edcd7c878afbd6d92523f7";
+
+      // Prepare the request payload
+      const payload = {
+        source: websiteUrl,
+        landscape: false,
+        format: "A4",
+        margin: {
+          top: "1cm",
+          right: "1cm",
+          bottom: "1cm",
+          left: "1cm"
+        },
+        wait_for: {
+          element: "header",
+          timeout: 5000
+        },
+        css: "body { font-family: 'Roboto', sans-serif; }",
+        filename: "Kyle_Cockcroft_CV.pdf"
+      };
+
+      console.log("Calling PDFShift API to generate PDF from:", websiteUrl);
+
+      // Call the PDFShift API
+      fetch(pdfshiftEndpoint, {
+        method: "POST",
         headers: {
-          Accept: "application/pdf"
-        }
+          "Content-Type": "application/json",
+          Authorization: "Basic " + btoa(apiKey + ":")
+        },
+        body: JSON.stringify(payload)
       })
         .then((response) => {
           console.log("Response status:", response.status);
 
           if (!response.ok) {
-            return response.text().then((text) => {
-              console.error("Error response body:", text);
+            return response.json().then((errorData) => {
+              console.error("Error response:", errorData);
               throw new Error(
-                "Server error: " + response.status + " " + response.statusText
+                "PDFShift API error: " +
+                  response.status +
+                  " " +
+                  response.statusText
               );
             });
           }
           return response.blob();
         })
         .then((blob) => {
-          console.log("Received blob:", blob.type, blob.size);
+          console.log("Received PDF blob:", blob.type, blob.size);
 
           // Create a URL for the blob
           const url = window.URL.createObjectURL(blob);
@@ -235,12 +262,12 @@ document.addEventListener("DOMContentLoaded", function () {
           // Show error message with more details
           let errorMessage = "Error generating PDF: " + error.message;
 
-          if (error.message.includes("500")) {
+          if (error.message.includes("401")) {
             errorMessage +=
-              "\n\nThe server encountered an error. Please check the Cloud Function logs for details.";
-          } else if (error.message.includes("Failed to fetch")) {
+              "\n\nInvalid API key. Please check your PDFShift API key.";
+          } else if (error.message.includes("429")) {
             errorMessage +=
-              "\n\nCould not connect to the Cloud Function. Please check that the URL is correct and the function is deployed.";
+              "\n\nRate limit exceeded. Please try again later or upgrade your PDFShift plan.";
           }
 
           alert(errorMessage);
