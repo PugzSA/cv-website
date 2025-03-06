@@ -187,7 +187,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const payload = {
         source: websiteUrl,
         landscape: false,
-        use_print: false
+        use_print: false,
+        format: "A4",
+        sandbox: true
       };
 
       console.log("Payload:", payload);
