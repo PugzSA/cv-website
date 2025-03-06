@@ -183,9 +183,6 @@ document.addEventListener("DOMContentLoaded", function () {
       // Your PDFShift API key
       const apiKey = "sk_63a669f7dee95799e7edcd7c878afbd6d92523f7";
 
-      // PDFShift API endpoint with API key as query parameter
-      const pdfshiftEndpoint = `https://api.pdfshift.io/v3/convert/pdf?api_key=${apiKey}`;
-
       // Prepare the request payload
       const payload = {
         source: websiteUrl,
@@ -206,15 +203,13 @@ document.addEventListener("DOMContentLoaded", function () {
       };
 
       console.log("Calling PDFShift API to generate PDF from:", websiteUrl);
-      console.log("Using API endpoint:", pdfshiftEndpoint);
-      console.log("With payload:", JSON.stringify(payload));
 
-      // Call the PDFShift API
-      fetch(pdfshiftEndpoint, {
+      // Call the PDFShift API using the correct authentication format
+      fetch("https://api.pdfshift.io/v3/convert/pdf", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
-          // No Authorization header needed when using api_key in the URL
+          "Content-Type": "application/json",
+          Authorization: "Basic " + btoa("api:" + apiKey)
         },
         body: JSON.stringify(payload)
       })
@@ -224,10 +219,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
           // For debugging: log the request details
           console.log("Request details:", {
-            url: pdfshiftEndpoint,
+            url: "https://api.pdfshift.io/v3/convert/pdf",
             method: "POST",
             headers: {
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
+              Authorization: "Basic " + btoa("api:" + apiKey)
             },
             payload: payload
           });
