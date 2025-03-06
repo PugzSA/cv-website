@@ -204,38 +204,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Add custom footer with proper styling according to documentation
         footer: {
-          source: `
-            <!-- Using a style tag for footer styling -->
-            <style>
-              .footer-container {
-                text-align: center;
-                padding: 10px 20px;
-                border-top: 1px solid #eee;
-                font-family: 'Arial', sans-serif;
-              }
-              .page-number {
-                font-size: 10px;
-                color: #666;
-                margin-bottom: 5px;
-              }
-              .copyright {
-                font-size: 10px;
-                color: #666;
-                margin-bottom: 5px;
-              }
-              .contact-info {
-                font-size: 10px;
-                color: #3498db;
-              }
-            </style>
-            
-            <!-- Footer content with classes that reference the styles above -->
-            <div class="footer-container">
-              <div class="page-number">Page {{page}} of {{total}}</div>
-              <div class="copyright">© {{date}} Kyle Cockcroft. All rights reserved.</div>
-              <div class="contact-info">Contact: kylecockcroft@gmail.com | +27 (83) 759-4462</div>
-            </div>
-          `,
+          source:
+            "<div style='text-align: center; font-size: 10px; color: #666; padding: 10px 20px; border-top: 1px solid #eee;'>Date Issued: {{date}} Page {{page}} of {{total}}</div>",
           height: "60px"
         }
       };
