@@ -182,17 +182,32 @@ document.addEventListener("DOMContentLoaded", function () {
       const cloudFunctionUrl =
         "https://generate-cv-pdf-1072078726443.us-central1.run.app";
 
+      console.log("Calling Cloud Function at:", cloudFunctionUrl);
+
       // Use fetch to call the Cloud Function
-      fetch(cloudFunctionUrl)
+      fetch(cloudFunctionUrl, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          Accept: "application/pdf"
+        }
+      })
         .then((response) => {
+          console.log("Response status:", response.status);
+
           if (!response.ok) {
-            throw new Error(
-              "Network response was not ok: " + response.statusText
-            );
+            return response.text().then((text) => {
+              console.error("Error response body:", text);
+              throw new Error(
+                "Server error: " + response.status + " " + response.statusText
+              );
+            });
           }
           return response.blob();
         })
         .then((blob) => {
+          console.log("Received blob:", blob.type, blob.size);
+
           // Create a URL for the blob
           const url = window.URL.createObjectURL(blob);
 
@@ -217,8 +232,18 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch((error) => {
           console.error("Error downloading PDF:", error);
 
-          // Show error message
-          alert("Error generating PDF: " + error.message);
+          // Show error message with more details
+          let errorMessage = "Error generating PDF: " + error.message;
+
+          if (error.message.includes("500")) {
+            errorMessage +=
+              "\n\nThe server encountered an error. Please check the Cloud Function logs for details.";
+          } else if (error.message.includes("Failed to fetch")) {
+            errorMessage +=
+              "\n\nCould not connect to the Cloud Function. Please check that the URL is correct and the function is deployed.";
+          }
+
+          alert(errorMessage);
 
           // Restore button state
           downloadBtn.innerHTML =
