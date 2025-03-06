@@ -180,11 +180,11 @@ document.addEventListener("DOMContentLoaded", function () {
       // Get the current page URL (your CV website)
       const websiteUrl = window.location.href;
 
-      // PDFShift API endpoint
-      const pdfshiftEndpoint = "https://api.pdfshift.io/v3/convert/pdf";
-
-      // Your PDFShift API key - replace with your actual API key
+      // Your PDFShift API key
       const apiKey = "sk_63a669f7dee95799e7edcd7c878afbd6d92523f7";
+
+      // PDFShift API endpoint with API key as query parameter
+      const pdfshiftEndpoint = `https://api.pdfshift.io/v3/convert/pdf?api_key=${apiKey}`;
 
       // Prepare the request payload
       const payload = {
@@ -206,22 +206,42 @@ document.addEventListener("DOMContentLoaded", function () {
       };
 
       console.log("Calling PDFShift API to generate PDF from:", websiteUrl);
+      console.log("Using API endpoint:", pdfshiftEndpoint);
+      console.log("With payload:", JSON.stringify(payload));
 
       // Call the PDFShift API
       fetch(pdfshiftEndpoint, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          Authorization: "Basic " + btoa(apiKey + ":")
+          "Content-Type": "application/json"
+          // No Authorization header needed when using api_key in the URL
         },
         body: JSON.stringify(payload)
       })
         .then((response) => {
           console.log("Response status:", response.status);
+          console.log("Response headers:", [...response.headers.entries()]);
+
+          // For debugging: log the request details
+          console.log("Request details:", {
+            url: pdfshiftEndpoint,
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            payload: payload
+          });
 
           if (!response.ok) {
-            return response.json().then((errorData) => {
-              console.error("Error response:", errorData);
+            return response.text().then((text) => {
+              let errorData;
+              try {
+                errorData = JSON.parse(text);
+                console.error("Error response:", errorData);
+              } catch (e) {
+                console.error("Error response (text):", text);
+              }
+
               throw new Error(
                 "PDFShift API error: " +
                   response.status +
@@ -268,6 +288,18 @@ document.addEventListener("DOMContentLoaded", function () {
           } else if (error.message.includes("429")) {
             errorMessage +=
               "\n\nRate limit exceeded. Please try again later or upgrade your PDFShift plan.";
+          } else if (error.message.includes("400")) {
+            errorMessage +=
+              "\n\nBad request. Please check the request payload and parameters.";
+          } else if (error.message.includes("403")) {
+            errorMessage +=
+              "\n\nForbidden. Your account might not have permission to perform this action.";
+          } else if (error.message.includes("500")) {
+            errorMessage +=
+              "\n\nServer error. PDFShift encountered an internal error. Please try again later.";
+          } else if (error.message.includes("Failed to fetch")) {
+            errorMessage +=
+              "\n\nNetwork error. Please check your internet connection.";
           }
 
           alert(errorMessage);
