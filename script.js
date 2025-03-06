@@ -189,7 +189,29 @@ document.addEventListener("DOMContentLoaded", function () {
         landscape: false,
         use_print: false,
         format: "A4",
-        sandbox: true
+        sandbox: true,
+
+        // Add custom header
+        header: {
+          source: `
+            <div style="text-align: right; font-size: 10px; color: #666; padding: 10px 20px; border-bottom: 1px solid #eee;">
+              <span>Kyle Cockcroft - CV</span>
+            </div>
+          `,
+          height: "30px"
+        },
+
+        // Add custom footer
+        footer: {
+          source: `
+            <div style="text-align: center; font-size: 10px; color: #666; padding: 10px 20px; border-top: 1px solid #eee;">
+              <div>Page {{page}} of {{total}}</div>
+              <div>© ${new Date().getFullYear()} Kyle Cockcroft. All rights reserved.</div>
+              <div>Contact: kylecockcroft@gmail.com | +27 (83) 759-4462</div>
+            </div>
+          `,
+          height: "60px"
+        }
       };
 
       console.log("Payload:", payload);
