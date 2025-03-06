@@ -204,7 +204,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Add custom footer
         footer: {
-          source: "<div>Date Issued: {{date}} Page {{page}} of {{total}}</div>",
+          source:
+            "<div style='text-align: center; font-size: 10px; color: #666; padding: 10px 20px; border-top: 1px solid #eee;'>Date Issued: {{date}} Page {{page}} of {{total}}</div>",
           height: "60px"
         }
       };
