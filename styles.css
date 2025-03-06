@@ -245,13 +245,13 @@ main {
 }
 
 /* Projects Section */
-.projects-container {
+.references-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
 }
 
-.project-item {
+.reference-item {
   padding: 20px;
   border-radius: 8px;
   background-color: #f8f9fa;
@@ -260,21 +260,21 @@ main {
     box-shadow 0.3s ease;
 }
 
-.project-item:hover {
+.reference-item:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-.project-description {
+.reference-description {
   margin-bottom: 15px;
 }
 
-.project-links {
+.reference-links {
   display: flex;
   gap: 15px;
 }
 
-.project-links a {
+.reference-links a {
   padding: 8px 15px;
   background-color: var(--secondary-color);
   color: white;
@@ -283,7 +283,7 @@ main {
   transition: background-color 0.3s ease;
 }
 
-.project-links a:hover {
+.reference-links a:hover {
   background-color: var(--primary-color);
 }
 
@@ -312,7 +312,7 @@ footer {
 
   .skills-container,
   .languages-container,
-  .projects-container {
+  .references-container {
     grid-template-columns: 1fr;
   }
 
@@ -373,4 +373,54 @@ footer {
     padding: 8px 16px;
     font-size: 0.9rem;
   }
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.skill-tag {
+  background-color: #0e5884;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  display: inline-block;
+}
+
+/* Make some tags wider based on content */
+.skill-tag:nth-child(4n + 2),
+.skill-tag:nth-child(4n) {
+  padding: 10px 20px;
+}
+
+/* For the longer tags like "Security: Profiles/Roles/Permission Sets" */
+.skill-tag:nth-child(14),
+.skill-tag:nth-child(2) {
+  padding: 10px 25px;
+}
+
+.skill-category h3 {
+  color: #0e5884;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.linkedin-icon {
+  display: inline-block;
+  background-color: #0077b5; /* LinkedIn blue color */
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  text-align: center;
+  margin-right: auto; /* This helps with left alignment */
+}
+
+.reference-item .social-links {
+  display: flex;
+  justify-content: flex-start; /* Ensures left alignment */
+  margin-top: 10px;
 }
