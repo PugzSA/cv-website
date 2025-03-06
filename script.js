@@ -218,9 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
           console.error("Error downloading PDF:", error);
 
           // Show error message
-          alert(
-            "Unable to generate PDF. Please try again later or view the CV online."
-          );
+          alert("Error generating PDF: " + error.message);
 
           // Restore button state
           downloadBtn.innerHTML =
@@ -401,10 +399,4 @@ document.addEventListener("DOMContentLoaded", function () {
       rect.bottom >= 0
     );
   }
-});
-
-// Navigate to your CV website
-await page.goto("https://pugzsa.github.io/cv-website/", {
-  waitUntil: "networkidle2",
-  timeout: 30000
 });
