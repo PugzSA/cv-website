@@ -402,3 +402,9 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 });
+
+// Navigate to your CV website
+await page.goto("https://pugzsa.github.io/cv-website/", {
+  waitUntil: "networkidle2",
+  timeout: 30000
+});
