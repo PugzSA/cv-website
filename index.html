@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Digital CV</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- HTML to PDF Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Fallback PDF libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header-content">
+          <h1>Kyle Cockcroft</h1>
+          <p class="title">Salesforce Technical Architect</p>
+          <div class="header-content">
+            <img
+              src="Kyle Profile Pic.jpg"
+              alt="Your Name"
+              class="profile-photo"
+            />
+            <!-- rest of the header content -->
+          </div>
+          <div class="contact-info">
+            <p><i class="fas fa-envelope"></i> kylecockcroft@gmail.com</p>
+            <p><i class="fas fa-phone"></i> +27 (83) 759-4462</p>
+            <p><i class="fas fa-map-marker-alt"></i> Cape Town, South Africa</p>
+          </div>
+          <div class="social-links">
+            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+          </div>
+          <button id="download-pdf" class="download-btn">
+            <i class="fas fa-download"></i> Download PDF
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <nav>
+      <div class="container">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#languages">Languages</a></li>
+          <li><a href="#projects">Projects</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <div class="container">
+        <section id="about">
+          <h2>About Me</h2>
+          <p>
+            Welcome to my digital CV! I am a passionate professional with
+            expertise in [your field]. With [X] years of experience, I
+            specialize in [your specialties]. I am dedicated to [your
+            professional goals or values].
+          </p>
+        </section>
+
+        <section id="experience">
+          <h2>Work Experience</h2>
+
+          <div class="experience-item">
+            <div class="experience-header">
+              <h3>Job Title</h3>
+              <p class="company">Watchmaker Genomics</p>
+              <p class="date">April 2024 - Present</p>
+            </div>
+            <ul>
+              <li>Responsibility or achievement 1</li>
+              <li>Responsibility or achievement 2</li>
+              <li>Responsibility or achievement 3</li>
+            </ul>
+          </div>
+
+          <div class="experience-item">
+            <div class="experience-header">
+              <h3>Previous Job Title</h3>
+              <p class="company">Previous Company</p>
+              <p class="date">Jan 2018 - Dec 2019</p>
+            </div>
+            <ul>
+              <li>Responsibility or achievement 1</li>
+              <li>Responsibility or achievement 2</li>
+              <li>Responsibility or achievement 3</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="education">
+          <h2>Education</h2>
+
+          <div class="education-item">
+            <h3>Degree Name</h3>
+            <p class="institution">University Name</p>
+            <p class="date">2014 - 2018</p>
+            <p>Relevant coursework, achievements, or GPA</p>
+          </div>
+        </section>
+
+        <section id="skills">
+          <h2>Skills</h2>
+
+          <div class="skills-container">
+            <div class="skill-category">
+              <h3>Technical Skills</h3>
+              <div class="skill-items">
+                <div class="skill-item">
+                  <span>Skill 1</span>
+                  <div class="skill-level">
+                    <div class="skill-progress" style="width: 90%"></div>
+                  </div>
+                </div>
+                <div class="skill-item">
+                  <span>Skill 2</span>
+                  <div class="skill-level">
+                    <div class="skill-progress" style="width: 85%"></div>
+                  </div>
+                </div>
+                <div class="skill-item">
+                  <span>Skill 3</span>
+                  <div class="skill-level">
+                    <div class="skill-progress" style="width: 80%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-category">
+              <h3>Soft Skills</h3>
+              <div class="skill-items">
+                <div class="skill-item">
+                  <span>Communication</span>
+                  <div class="skill-level">
+                    <div class="skill-progress" style="width: 95%"></div>
+                  </div>
+                </div>
+                <div class="skill-item">
+                  <span>Leadership</span>
+                  <div class="skill-level">
+                    <div class="skill-progress" style="width: 85%"></div>
+                  </div>
+                </div>
+                <div class="skill-item">
+                  <span>Problem Solving</span>
+                  <div class="skill-level">
+                    <div class="skill-progress" style="width: 90%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="languages">
+          <h2>Languages</h2>
+
+          <div class="languages-container">
+            <div class="language-item">
+              <span>English</span>
+              <div class="language-level">Native</div>
+            </div>
+            <div class="language-item">
+              <span>Spanish</span>
+              <div class="language-level">Fluent</div>
+            </div>
+            <div class="language-item">
+              <span>French</span>
+              <div class="language-level">Intermediate</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="projects">
+          <h2>Projects</h2>
+
+          <div class="projects-container">
+            <div class="project-item">
+              <h3>Project Name</h3>
+              <p class="project-description">
+                Brief description of the project, technologies used, and your
+                role.
+              </p>
+              <div class="project-links">
+                <a href="#" target="_blank">View Project</a>
+                <a href="#" target="_blank">GitHub</a>
+              </div>
+            </div>
+
+            <div class="project-item">
+              <h3>Another Project</h3>
+              <p class="project-description">
+                Brief description of the project, technologies used, and your
+                role.
+              </p>
+              <div class="project-links">
+                <a href="#" target="_blank">View Project</a>
+                <a href="#" target="_blank">GitHub</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>
+          &copy; <span id="current-year"></span> Kyle Cockcroft. All rights
+          reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
