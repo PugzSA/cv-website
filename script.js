@@ -187,20 +187,10 @@ document.addEventListener("DOMContentLoaded", function () {
       const payload = {
         source: websiteUrl,
         landscape: false,
-        format: "A4",
-        margin: {
-          top: "1cm",
-          right: "1cm",
-          bottom: "1cm",
-          left: "1cm"
-        },
-        wait_for: {
-          element: "header",
-          timeout: 5000
-        },
-        css: "body { font-family: 'Roboto', sans-serif; }",
-        filename: "Kyle_Cockcroft_CV.pdf"
+        use_print: false
       };
+
+      console.log("Payload:", payload);
 
       console.log("Calling PDFShift API to generate PDF from:", websiteUrl);
 
